@@ -1,0 +1,14 @@
+SELECT
+    E.ID,
+    IFNULL(C.COUNT,0) AS CHILD_COUNT
+FROM
+    ECOLI_DATA E
+    LEFT JOIN (SELECT
+        PARENT_ID,
+        COUNT(*) AS COUNT
+    FROM
+        ECOLI_DATA
+    GROUP BY
+        PARENT_ID
+    ) C ON E.ID = C.PARENT_ID
+;
