@@ -17,17 +17,33 @@ public class Main {
 
         int cnt = 0;
         String P = sb.toString();
-        for (int i = 0; i < M-P.length()+1; i++){
-            boolean flag = true;
-            for (int j = 0; j < P.length(); j++){
+        int lenP = P.length();
+
+        int i = 0;
+        int j = 0;
+        boolean flag = true;
+        while (i <= M-lenP){
+            for (;j<lenP;j++){
                 if (S.charAt(i+j) != P.charAt(j)){
                     flag = false;
                     break;
                 }
             }
+
             if (flag){
                 cnt++;
+                i += 2;
+                j--;
+                while (i <= M-lenP && S.charAt(i+j) == 'I' && S.charAt(i+j-1) == 'O'){
+                    cnt++;
+                    i += 2;
+                }
+                i += j-2;
+            } else {
+                flag = true;
             }
+            i++;
+            j = 0;
         }
 
         System.out.println(cnt);
